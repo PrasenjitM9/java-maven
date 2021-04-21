@@ -22,34 +22,40 @@ pipeline {
                 }
                 
             }
-		
+/*		
 	stage('Test') { 
             steps {
-//                    sh 'mvn test' 
+	          sh 'mvn test' 
                     bat 'mvn test' 
                 }
                 
             }
+*/
+
 	/* stage('Sonar') { 
             steps {
                 withMaven(maven : 'maven'){
-//                    sh 'mvn sonar:sonar' 
+                    sh 'mvn sonar:sonar' 
                     bat 'mvn sonar:sonar' 
                 }
                 
             }
         } 
 	*/
+	stage('Test') { 
+            steps {
+                    bat 'mvn package' 
+                }
+                
+            }
+
     }
 
     post {
         
-		always {
-		
+	always {
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: './target/surefire-reports/', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
-
 			
         }
     }
-	
 }
