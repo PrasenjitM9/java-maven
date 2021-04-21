@@ -6,7 +6,7 @@ pipeline {
         
 		stage('Clean') { 
             steps {
-                withMaven(maven : 'Maven_3.6.2'){
+                withMaven(maven : 'maven'){
 		    //sh 'mvn clean' 
                     bat 'mvn clean' 
                 }
@@ -16,7 +16,7 @@ pipeline {
 		
 		stage('Compile') { 
             steps {
-                withMaven(maven : 'Maven_3.6.2'){
+                withMaven(maven : 'maven'){
                     //sh 'mvn compile' 
                     bat 'mvn compile'
                 }
@@ -26,7 +26,7 @@ pipeline {
 		
 		stage('Test') { 
             steps {
-                withMaven(maven : 'Maven_3.6.2'){
+                withMaven(maven : 'maven'){
 //                    sh 'mvn test' 
                     bat 'mvn test' 
                 }
@@ -35,7 +35,7 @@ pipeline {
         }
        /* stage('Sonar') { 
             steps {
-                withMaven(maven : 'Maven_3.6.2'){
+                withMaven(maven : 'maven'){
 //                    sh 'mvn sonar:sonar' 
                     bat 'mvn sonar:sonar' 
                 }
