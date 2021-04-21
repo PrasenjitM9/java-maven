@@ -1,39 +1,36 @@
 pipeline {
     
 	agent any 
+	tools {
+		maven 'maven'
+	}
     
 	stages {
         
-		stage('Clean') { 
+	stage('Clean') { 
             steps {
-                withMaven(maven : 'maven'){
 		    //sh 'mvn clean' 
                     bat 'mvn clean' 
                 }
                 
             }
-        }
 		
-		stage('Compile') { 
+	stage('Compile') { 
             steps {
-                withMaven(maven : 'maven'){
                     //sh 'mvn compile' 
                     bat 'mvn compile'
                 }
                 
             }
-        }
 		
-		stage('Test') { 
+	stage('Test') { 
             steps {
-                withMaven(maven : 'maven'){
 //                    sh 'mvn test' 
                     bat 'mvn test' 
                 }
                 
             }
-        }
-       /* stage('Sonar') { 
+	/* stage('Sonar') { 
             steps {
                 withMaven(maven : 'maven'){
 //                    sh 'mvn sonar:sonar' 
