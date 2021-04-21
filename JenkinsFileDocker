@@ -1,0 +1,41 @@
+pipeline {
+    
+	agent any 
+    
+	stages {
+        
+		stage('Clean') { 
+            steps {
+                sh 'docker run -t -v "$PWD":/usr/src -w /usr/src -v $HOME/.m2:/root/.m2 markhobson/maven-chrome mvn clean' 
+            }
+        }
+		
+		stage('Compile') { 
+            steps {
+                sh 'docker run -t -v "$PWD":/usr/src -w /usr/src -v $HOME/.m2:/root/.m2 markhobson/maven-chrome mvn compile' 
+            }
+        }
+		
+		stage('Test') { 
+            steps {
+                sh 'docker run -t -v "$PWD":/usr/src -w /usr/src -v $HOME/.m2:/root/.m2 markhobson/maven-chrome mvn test' 
+            }
+        }
+        // stage('Sonar') { 
+        //     steps {
+        //         sh 'docker run -t -v "$PWD":/usr/src -w /usr/src -v $HOME/.m2:/root/.m2 markhobson/maven-chrome mvn sonar:sonar' 
+        //     }
+        // }   
+    }
+
+    post {
+        
+		always {
+		
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: './target/surefire-reports/', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+
+			
+        }
+    }
+	
+}

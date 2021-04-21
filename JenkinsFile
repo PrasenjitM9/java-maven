@@ -1,0 +1,54 @@
+pipeline {
+    
+	agent any 
+    
+	stages {
+        
+		stage('Clean') { 
+            steps {
+                withMaven(maven : 'Maven_3.6.2'){
+                    sh 'mvn clean' 
+                }
+                
+            }
+        }
+		
+		stage('Compile') { 
+            steps {
+                withMaven(maven : 'Maven_3.6.2'){
+                    sh 'mvn compile' 
+                }
+                
+            }
+        }
+		
+		stage('Test') { 
+            steps {
+                withMaven(maven : 'Maven_3.6.2'){
+                    sh 'mvn test' 
+                }
+                
+            }
+        }
+       /* stage('Sonar') { 
+            steps {
+                withMaven(maven : 'Maven_3.6.2'){
+                    sh 'mvn sonar:sonar' 
+                }
+                
+            }
+        } 
+	*/
+    }
+
+    post {
+        
+		always {
+		
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: './target/surefire-reports/', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+
+			
+        }
+    }
+	
+}

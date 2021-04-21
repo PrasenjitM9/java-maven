@@ -1,0 +1,34 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="Mea Test Suite" verbose="3" parallel="tests"
+	thread-count="1">
+
+	<listeners>
+	
+		<listener class-name="com.utils.TakeScreenshotListner" />
+	
+		<listener class-name="com.utils.RetryFailedTestsListner" />
+		
+	</listeners>
+
+	<!-- <parameter name="browserName" value="firefox"></parameter> -->
+	
+	<parameter name="browserName" value="chrome"></parameter>
+
+	<!--
+	 <test name="LoginTest">
+		<classes>
+			<class name="com.tests.LoginTest"></class>
+		</classes>
+	</test>
+	 -->
+	
+	<test name="ProductSearchTest">
+		<classes>
+			<class name="com.tests.ProductSearchTest"></class>
+		</classes>
+	</test>
+
+
+
+</suite> 
+ 
