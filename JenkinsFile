@@ -1,6 +1,7 @@
 pipeline {
-    
-	agent any 
+        agent { label 'master' }
+
+	//agent any 
 	tools {
 		maven 'maven'
 	}
@@ -9,16 +10,16 @@ pipeline {
         
 	stage('Clean') { 
             steps {
-		    //sh 'mvn clean' 
-                    bat 'mvn clean' 
+		    sh 'mvn clean' 
+                    //bat 'mvn clean' 
                 }
                 
             }
 		
 	stage('Compile') { 
             steps {
-                    //sh 'mvn compile' 
-                    bat 'mvn compile'
+                    sh 'mvn compile' 
+                    //bat 'mvn compile'
                 }
                 
             }
@@ -44,7 +45,7 @@ pipeline {
 	*/
 	stage('Test') { 
             steps {
-                    bat 'mvn package' 
+                    sh 'mvn package' 
                 }
                 
             }
