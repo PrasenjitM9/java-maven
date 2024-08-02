@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+    }
+    stages {
+        stage('Clone sources') {
+            steps {
+                git 'https://github.com/PrasenjitM9/java-maven.git'
+            }
+        }
+        stage('Install') {
+            steps {
+                sh "mvn package"
+            }
+        }
+ /*       stage('Deploy to Nexus') {
+            steps {
+                configFileProvider([configFile(fileId: 'our_settings', variable: 'SETTINGS')]) {
+                    sh "mvn -s $SETTINGS deploy  -DskipTests -Dnexus-releases-url=${env.NEXUS_RELEASES_URL} -Dnexus-snapshots-url=${env.NEXUS_SNAPSHOTS_URL}"
+                }
+            } */
+        }
+    }
+}
