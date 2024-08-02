@@ -2,10 +2,10 @@ pipeline {
         agent { label 'master' }
 
 	//agent any 
-/*	tools {
-		maven 'maven'
+	tools {
+		maven 'mvn'
 	}
-  */  
+    
 	stages {
         
 	stage('Clean') { 
