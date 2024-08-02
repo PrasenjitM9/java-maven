@@ -52,9 +52,9 @@ pipeline {
 
     }
 
-    post {
+/*    post {
         echo "Success"
-	/*always {
+	always {
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: './target/surefire-reports/', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
 			
         } */
